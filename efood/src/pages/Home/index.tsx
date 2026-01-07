@@ -1,3 +1,6 @@
+// Hooks do React
+import { useEffect, useState } from 'react'
+
 // Importa o Header
 import Header from '../../components/Header'
 
@@ -7,85 +10,34 @@ import Footer from '../../components/Footer'
 // Importa o Card de restaurante
 import RestaurantCard from '../../components/RestaurantCard'
 
-// Imagem usada nos cards
-import heroImage from '../../assets/Hero.png'
+// Serviço de API (axios configurado)
+import { api } from '../../services/api'
 
-// =====================
-// TIPAGEM DO RESTAURANTE
-// =====================
-type Restaurant = {
-    id: number
-    title: string
-    description: string
-    image: string
-    tag: string
-    rating: number
-}
+// Tipagem oficial do restaurante
+import type { Restaurant } from '../../types/Restaurant'
 
-// =====================
-// MOCK DE RESTAURANTES
-// =====================
-const restaurants: Restaurant[] = [
-    {
-        id: 1,
-        title: 'Hioki Sushi',
-        description:
-            'Peça já o melhor da culinária japonesa no conforto da sua casa.',
-        image: heroImage,
-        tag: 'Destaque da semana',
-        rating: 4.9
-    },
-    {
-        id: 2,
-        title: 'La Dolce Vita Trattoria',
-        description:
-            'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você.',
-        image: heroImage,
-        tag: 'Italiana',
-        rating: 4.6
-    },
-    {
-        id: 3,
-        title: 'La Dolce Vita Trattoria',
-        description:
-            'Desfrute de massas caseiras e risotos deliciosos.',
-        image: heroImage,
-        tag: 'Italiana',
-        rating: 4.6
-    },
-    {
-        id: 4,
-        title: 'La Dolce Vita Trattoria',
-        description:
-            'Entrega rápida, pratos bem embalados e sabor inesquecível.',
-        image: heroImage,
-        tag: 'Italiana',
-        rating: 4.6
-    },
-    {
-        id: 5,
-        title: 'La Dolce Vita Trattoria',
-        description:
-            'Culinária italiana tradicional com ingredientes selecionados.',
-        image: heroImage,
-        tag: 'Italiana',
-        rating: 4.6
-    },
-    {
-        id: 6,
-        title: 'La Dolce Vita Trattoria',
-        description:
-            'Uma experiência gastronômica inesquecível.',
-        image: heroImage,
-        tag: 'Italiana',
-        rating: 4.6
-    }
-]
 
 // =====================
 // COMPONENTE HOME
 // =====================
 const Home = () => {
+    // Estado que armazena os restaurantes vindos da API
+    const [restaurants, setRestaurants] = useState<Restaurant[]>([])
+
+    // useEffect executa quando a página carrega
+    useEffect(() => {
+        // Faz requisição para a API da EBAC
+        api
+            .get('/restaurantes')
+            .then((response) => {
+                // Salva os dados no estado
+                setRestaurants(response.data)
+            })
+            .catch((error) => {
+                console.error('Erro ao buscar restaurantes:', error)
+            })
+    }, [])
+
     return (
         <>
             {/* HEADER */}
@@ -98,6 +50,7 @@ const Home = () => {
                     padding: '80px 0'
                 }}
             >
+                {/* CONTAINER CENTRAL (FIGMA = 1024px) */}
                 <div
                     style={{
                         maxWidth: '1024px',
@@ -107,23 +60,26 @@ const Home = () => {
                         gap: '80px'
                     }}
                 >
+                    {/* MAPEIA OS RESTAURANTES DA API */}
                     {restaurants.map((restaurant) => (
                         <RestaurantCard
                             key={restaurant.id}
-                            title={restaurant.title}
-                            description={restaurant.description}
-                            image={restaurant.image}
-                            tag={restaurant.tag}
-                            rating={restaurant.rating}
+                            id={restaurant.id}
+                            title={restaurant.titulo}
+                            description={restaurant.descricao}
+                            image={restaurant.capa}
+                            tag={restaurant.tipo}
+                            rating={restaurant.avaliacao}
                         />
                     ))}
                 </div>
             </section>
 
-            {/* FOOTER (ESTAVA FALTANDO) */}
+            {/* FOOTER */}
             <Footer />
         </>
     )
 }
 
+// Export obrigatório
 export default Home

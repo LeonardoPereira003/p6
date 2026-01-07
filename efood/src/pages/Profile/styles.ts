@@ -48,7 +48,7 @@ export const TopBar = styled.header`
 
     export const Hero = styled.section`
     width: 100%;
-    height: 280px;
+    height: 500px;
 
     background-image: url(${heroImg});
     background-size: cover;
@@ -113,7 +113,7 @@ export const TopBar = styled.header`
     padding: 8px;
     `
 
-    export const ProductImage = styled.div`
+    export const ProductImage = styled.img`
     width: 100%;
     height: 167px;
     background-color: #ccc;

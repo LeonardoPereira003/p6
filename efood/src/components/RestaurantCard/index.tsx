@@ -1,43 +1,63 @@
-    import * as S from './styles'
+// Importa o Link para navegação entre páginas
+import { Link } from 'react-router-dom'
 
-    type Props = {
+// Importa os estilos do card
+import * as S from './styles'
+
+// =====================
+// TIPAGEM DAS PROPS
+// =====================
+type Props = {
+    id: number              // 🔥 ID do restaurante
     title: string
     description: string
     image: string
     tag: string
     rating: number
-    }
+}
 
-    const RestaurantCard = ({
+// =====================
+// COMPONENTE DO CARD
+// =====================
+const RestaurantCard = ({
+    id,
     title,
     description,
     image,
     tag,
     rating
-    }: Props) => {
+}: Props) => {
     return (
         <S.Card>
-        <S.ImageWrapper>
-            <S.Image src={image} alt={title} />
-            <S.Tag>{tag}</S.Tag>
-        </S.ImageWrapper>
+            {/* Imagem do restaurante */}
+            <S.ImageWrapper>
+                <S.Image src={image} alt={title} />
+                <S.Tag>{tag}</S.Tag>
+            </S.ImageWrapper>
 
-        <S.Content>
-            <S.Header>
-            <S.Title>{title}</S.Title>
+            {/* Conteúdo do card */}
+            <S.Content>
+                <S.Header>
+                    <S.Title>{title}</S.Title>
 
-            <S.Rating>
-                {rating}
-                <span>⭐</span>
-            </S.Rating>
-            </S.Header>
+                    <S.Rating>
+                        {rating}
+                        <span>⭐</span>
+                    </S.Rating>
+                </S.Header>
 
-            <S.Description>{description}</S.Description>
+                <S.Description>{description}</S.Description>
 
-            <S.Button>Saiba mais</S.Button>
-        </S.Content>
+                {/* 
+                    🔥 AGORA O ID É DINÂMICO
+                    Navega corretamente para o Profile
+                */}
+                <Link to={`/restaurante/${id}`}>
+                    <S.Button>Saiba mais</S.Button>
+                </Link>
+            </S.Content>
         </S.Card>
     )
-    }
+}
 
-    export default RestaurantCard
+export default RestaurantCard
