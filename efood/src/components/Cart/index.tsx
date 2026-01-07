@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { RootState } from '../../store'
 import { removeItem } from '../../store/cartSlice'
 
-// Componente do carrinho lateral
+// =====================
+// PROPS DO CARRINHO
+// =====================
 type Props = {
     onClose: () => void
+    onNext: () => void
 }
 
-const Cart = ({ onClose }: Props) => {
+const Cart = ({ onClose, onNext }: Props) => {
     const dispatch = useDispatch()
-
-    // 🔥 BUSCA OS ITENS DO REDUX
     const items = useSelector((state: RootState) => state.cart.items)
 
-    // Calcula o valor total
     const total = items.reduce(
         (acc, item) => acc + item.product.preco * item.quantity,
         0
@@ -23,15 +23,12 @@ const Cart = ({ onClose }: Props) => {
     return (
         <S.Overlay>
             <S.CartContainer>
-                {/* Botão fechar */}
                 <S.CloseArea onClick={onClose}>×</S.CloseArea>
 
-                {/* Se não tiver itens */}
                 {items.length === 0 ? (
                     <p>Carrinho vazio</p>
                 ) : (
                     <>
-                        {/* Lista de produtos */}
                         <S.Items>
                             {items.map((item) => (
                                 <S.Item key={item.product.id}>
@@ -39,14 +36,10 @@ const Cart = ({ onClose }: Props) => {
 
                                     <div>
                                         <h4>{item.product.nome}</h4>
-                                        <span>
-                                            R$ {item.product.preco.toFixed(2)}
-                                        </span>
+                                        <span>R$ {item.product.preco.toFixed(2)}</span>
                                     </div>
 
-                                    {/* Remove do carrinho */}
                                     <button
-                                        title="Remover"
                                         onClick={() =>
                                             dispatch(removeItem(item.product.id))
                                         }
@@ -57,14 +50,15 @@ const Cart = ({ onClose }: Props) => {
                             ))}
                         </S.Items>
 
-                        {/* Rodapé */}
                         <S.Summary>
                             <div>
                                 <span>Valor total</span>
                                 <span>R$ {total.toFixed(2)}</span>
                             </div>
 
-                            <button>Continuar com a entrega</button>
+                            <button onClick={onNext}>
+                                Continuar com a entrega
+                            </button>
                         </S.Summary>
                     </>
                 )}

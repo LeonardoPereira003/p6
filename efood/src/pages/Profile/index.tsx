@@ -7,29 +7,26 @@ import pizzaImg from '../../assets/pizza.jpg'
 
 import ProductModal from '../../components/ProductModal'
 import Cart from '../../components/Cart'
+import CheckoutEntrega from '../../components/CheckoutEntrega'
+import Footer from '../../components/Footer'
 
 import { addItem } from '../../store/cartSlice'
 import type { Product } from '../../types/Product'
 import type { RootState } from '../../store'
 
 const Profile = () => {
-    // controla abertura do modal
     const [modalAberto, setModalAberto] = useState(false)
+    const [painelAberto, setPainelAberto] = useState(false)
+    const [etapa, setEtapa] = useState<'cart' | 'checkout'>('cart')
 
-    // controla abertura do carrinho lateral
-    const [carrinhoAberto, setCarrinhoAberto] = useState(false)
-
-    // Redux
     const dispatch = useDispatch()
     const items = useSelector((state: RootState) => state.cart.items)
 
-    // quantidade total de itens no carrinho (Redux)
     const quantidade = items.reduce(
         (acc, item) => acc + item.quantity,
         0
     )
 
-    // PRODUTO MOCK (temporário – depois vem da API)
     const produtoMock: Product = {
         id: 1,
         nome: 'Pizza Marguerita',
@@ -40,56 +37,48 @@ const Profile = () => {
         porcao: 'Serve: 2 pessoas'
     }
 
-    // adiciona produto ao carrinho (Redux)
     function adicionarAoCarrinho() {
         dispatch(addItem(produtoMock))
         setModalAberto(false)
-        setCarrinhoAberto(true)
+        setEtapa('cart')
+        setPainelAberto(true)
     }
 
     return (
         <>
-            {/* ================= HEADER ================= */}
             <S.TopBar>
                 <S.TopBarContent>
                     <S.TopBarText>Restaurantes</S.TopBarText>
-
                     <S.Logo src={logo} alt="efood" />
 
-                    {/* abre o carrinho */}
                     <S.TopBarText
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => setCarrinhoAberto(true)}
+                        onClick={() => {
+                            setEtapa('cart')
+                            setPainelAberto(true)
+                        }}
                     >
                         {quantidade} produto(s) no carrinho
                     </S.TopBarText>
                 </S.TopBarContent>
             </S.TopBar>
 
-            {/* ================= HERO ================= */}
             <S.Hero>
                 <S.HeroInner />
             </S.Hero>
 
-            {/* ================= PRODUTOS ================= */}
             <S.ProductsSection>
                 <S.ProductsContainer>
                     {Array.from({ length: 6 }).map((_, index) => (
                         <S.ProductCard key={index}>
-                            <S.ProductImage
-                                src={pizzaImg}
-                                alt="Pizza Marguerita"
-                            />
+                            <S.ProductImage src={pizzaImg} />
 
                             <S.ProductInfo>
                                 <h3>Pizza Marguerita</h3>
                                 <p>
                                     A clássica Marguerita: molho de tomate,
-                                    mussarela derretida, manjericão fresco
-                                    e um toque de azeite.
+                                    mussarela derretida, manjericão fresco.
                                 </p>
 
-                                {/* abre SOMENTE o modal */}
                                 <button onClick={() => setModalAberto(true)}>
                                     Adicionar ao carrinho
                                 </button>
@@ -99,7 +88,6 @@ const Profile = () => {
                 </S.ProductsContainer>
             </S.ProductsSection>
 
-            {/* ================= MODAL ================= */}
             {modalAberto && (
                 <ProductModal
                     onClose={() => setModalAberto(false)}
@@ -107,22 +95,21 @@ const Profile = () => {
                 />
             )}
 
-            {/* ================= CARRINHO ================= */}
-            {carrinhoAberto && (
-                <Cart onClose={() => setCarrinhoAberto(false)} />
+            {painelAberto && etapa === 'cart' && (
+                <Cart
+                    onClose={() => setPainelAberto(false)}
+                    onNext={() => setEtapa('checkout')}
+                />
             )}
 
-            {/* ================= FOOTER ================= */}
-            <S.Footer>
-                <S.FooterContent>
-                    <img src={logo} alt="efood" />
-                    <p>
-                        A efood é uma plataforma para divulgação de
-                        estabelecimentos, a responsabilidade pela
-                        entrega é toda do restaurante contratado.
-                    </p>
-                </S.FooterContent>
-            </S.Footer>
+            {painelAberto && etapa === 'checkout' && (
+                <CheckoutEntrega
+                    onBack={() => setEtapa('cart')}
+                    onNext={() => alert('Pagamento vem na próxima etapa')}
+                />
+            )}
+
+            <Footer />
         </>
     )
 }
