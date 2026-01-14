@@ -1,18 +1,16 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Product } from '../types/Product'
 
-// Item do carrinho
 type CartItem = {
     product: Product
     quantity: number
 }
 
-// Estado do carrinho
 type CartState = {
     items: CartItem[]
 }
 
-// Estado inicial
 const initialState: CartState = {
     items: []
 }
@@ -38,11 +36,15 @@ const cartSlice = createSlice({
 
         removeItem: (state, action: PayloadAction<number>) => {
             state.items = state.items.filter(
-                (i) => i.product.id !== action.payload
+                (item) => item.product.id !== action.payload
             )
+        },
+
+        clearCart: (state) => {
+            state.items = []
         }
     }
 })
 
-export const { addItem, removeItem } = cartSlice.actions
+export const { addItem, removeItem, clearCart } = cartSlice.actions
 export default cartSlice.reducer

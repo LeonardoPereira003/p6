@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import * as S from './styles'
 import logo from '../../assets/logo.png'
@@ -8,16 +9,22 @@ import pizzaImg from '../../assets/pizza.jpg'
 import ProductModal from '../../components/ProductModal'
 import Cart from '../../components/Cart'
 import CheckoutEntrega from '../../components/CheckoutEntrega'
+import CheckoutPagamento from '../../components/CheckoutPagamento'
+import CheckoutConfirmacao from '../../components/CheckoutConfirmacao'
 import Footer from '../../components/Footer'
 
-import { addItem } from '../../store/cartSlice'
+import { addItem, clearCart } from '../../store/cartSlice'
 import type { Product } from '../../types/Product'
 import type { RootState } from '../../store'
 
+type Etapa = 'cart' | 'entrega' | 'pagamento' | 'confirmacao'
+
 const Profile = () => {
+    const navigate = useNavigate()
+
     const [modalAberto, setModalAberto] = useState(false)
     const [painelAberto, setPainelAberto] = useState(false)
-    const [etapa, setEtapa] = useState<'cart' | 'checkout'>('cart')
+    const [etapa, setEtapa] = useState<Etapa>('cart')
 
     const dispatch = useDispatch()
     const items = useSelector((state: RootState) => state.cart.items)
@@ -31,7 +38,7 @@ const Profile = () => {
         id: 1,
         nome: 'Pizza Marguerita',
         descricao:
-            'A clássica Marguerita: molho de tomate, mussarela derretida, manjericão fresco e um toque de azeite.',
+            'A clássica Marguerita: molho de tomate, mussarela derretida, manjericão fresco.',
         foto: pizzaImg,
         preco: 60.9,
         porcao: 'Serve: 2 pessoas'
@@ -44,14 +51,30 @@ const Profile = () => {
         setPainelAberto(true)
     }
 
+    function finalizarPedido() {
+        dispatch(clearCart())
+        setPainelAberto(false)
+        setEtapa('cart')
+        navigate('/') // 🔥 VOLTA PRA HOME
+    }
+
     return (
         <>
+            {/* ================= HEADER ================= */}
             <S.TopBar>
                 <S.TopBarContent>
                     <S.TopBarText>Restaurantes</S.TopBarText>
-                    <S.Logo src={logo} alt="efood" />
+
+                    {/* 🔥 VOLTA PRA HOME */}
+                    <S.Logo
+                        src={logo}
+                        alt="efood"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => navigate('/')}
+                    />
 
                     <S.TopBarText
+                        style={{ cursor: 'pointer' }}
                         onClick={() => {
                             setEtapa('cart')
                             setPainelAberto(true)
@@ -62,15 +85,17 @@ const Profile = () => {
                 </S.TopBarContent>
             </S.TopBar>
 
+            {/* ================= HERO ================= */}
             <S.Hero>
                 <S.HeroInner />
             </S.Hero>
 
+            {/* ================= PRODUTOS ================= */}
             <S.ProductsSection>
                 <S.ProductsContainer>
                     {Array.from({ length: 6 }).map((_, index) => (
                         <S.ProductCard key={index}>
-                            <S.ProductImage src={pizzaImg} />
+                            <S.ProductImage src={pizzaImg} alt="Pizza Marguerita" />
 
                             <S.ProductInfo>
                                 <h3>Pizza Marguerita</h3>
@@ -88,6 +113,7 @@ const Profile = () => {
                 </S.ProductsContainer>
             </S.ProductsSection>
 
+            {/* ================= MODAL ================= */}
             {modalAberto && (
                 <ProductModal
                     onClose={() => setModalAberto(false)}
@@ -95,20 +121,33 @@ const Profile = () => {
                 />
             )}
 
+            {/* ================= PAINEL LATERAL ================= */}
             {painelAberto && etapa === 'cart' && (
                 <Cart
                     onClose={() => setPainelAberto(false)}
-                    onNext={() => setEtapa('checkout')}
+                    onNext={() => setEtapa('entrega')}
                 />
             )}
 
-            {painelAberto && etapa === 'checkout' && (
+            {painelAberto && etapa === 'entrega' && (
                 <CheckoutEntrega
                     onBack={() => setEtapa('cart')}
-                    onNext={() => alert('Pagamento vem na próxima etapa')}
+                    onNext={() => setEtapa('pagamento')}
                 />
             )}
 
+            {painelAberto && etapa === 'pagamento' && (
+                <CheckoutPagamento
+                    onBack={() => setEtapa('entrega')}
+                    onFinish={() => setEtapa('confirmacao')}
+                />
+            )}
+
+            {painelAberto && etapa === 'confirmacao' && (
+                <CheckoutConfirmacao onFinish={finalizarPedido} />
+            )}
+
+            {/* ================= FOOTER ================= */}
             <Footer />
         </>
     )
