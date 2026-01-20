@@ -4,6 +4,8 @@
     background-color: #ffffff;
     border: 1px solid #e66767;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     `
 
     /* Wrapper da imagem (para tags em cima) */
@@ -11,17 +13,18 @@
     position: relative;
     `
 
-    /* IMAGEM – CORRIGIDA */
+    /* IMAGEM */
     export const Image = styled.img`
     width: 100%;
     height: 217px;
     object-fit: cover;
-
-    /* 🔴 ESSENCIAL */
     display: block;
-
-    /* fallback visual caso a imagem falhe */
     background-color: #f2f2f2;
+
+    /* 🔥 RESPONSIVO */
+    @media (max-width: 768px) {
+        height: 180px;
+    }
     `
 
     /* Tag no canto superior direito */
@@ -39,7 +42,10 @@
     `
 
     export const Content = styled.div`
-    padding: 8px;
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     `
 
     /* Cabeçalho do card (título + nota) */
@@ -69,16 +75,20 @@
     export const Description = styled.p`
     font-size: 14px;
     line-height: 22px;
+    font-weight: 400;
     color: #4b4b4b;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     `
 
     export const Button = styled.button`
+    margin-top: auto; /* 🔥 empurra o botão pra baixo */
+    align-self: flex-start;
+
     background-color: #e66767;
     color: #ffffff;
 
     border: none;
-    padding: 4px 8px;
+    padding: 6px 12px;
 
     font-size: 14px;
     font-weight: 700;

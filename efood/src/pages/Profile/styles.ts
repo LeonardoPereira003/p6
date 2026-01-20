@@ -3,31 +3,30 @@
 
     /* ================= HEADER ================= */
 
-export const TopBar = styled.header`
+    export const TopBar = styled.header`
     width: 100%;
     height: 186px;
-
     background-color: #fff8f2;
 
-    /*
-        Vector EXATO do Figma
-        (imagem exportada, sem recriar SVG)
-    */
-    background-image: url('/Vector.png'); /* ou hero-bg.png se for esse o nome */
+    background-image: url('/Vector.png');
     background-repeat: repeat-x;
     background-position: center -24px;
     background-size: auto 384px;
 
     display: flex;
     justify-content: center;
+
+    @media (max-width: 768px) {
+        height: 140px;
+    }
     `
 
     export const TopBarContent = styled.div`
-    max-width: 1366px;
+    max-width: 1024px;
     width: 100%;
     height: 100%;
 
-    padding: 0 24px;
+    padding: 0 16px;
 
     display: flex;
     align-items: center;
@@ -38,58 +37,78 @@ export const TopBar = styled.header`
     font-size: 18px;
     font-weight: 700;
     color: #e66767;
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
     `
 
     export const Logo = styled.img`
     height: 36px;
+
+    @media (max-width: 768px) {
+        height: 28px;
+    }
     `
 
-    /* ================= APRESENTAÇÃO ================= */
+    /* ================= HERO (BANNER DO PERFIL) ================= */
 
     export const Hero = styled.section`
     width: 100%;
-    height: 500px;
+    height: 280px;
 
     background-image: url(${heroImg});
     background-size: cover;
     background-position: center;
 
     position: relative;
-    display: flex;
-    justify-content: center;
+
+    @media (max-width: 768px) {
+        height: 220px;
+    }
     `
 
+    /* Overlay escuro do Figma */
     export const HeroOverlay = styled.div`
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     `
 
+    /* Conteúdo textual (SEM TEXTO NA IMAGEM) */
     export const HeroInner = styled.div`
-    max-width: 1366px;
-    width: 100%;
+    max-width: 1024px;
     height: 100%;
-
-    padding: 0 24px;
+    margin: 0 auto;
+    padding: 24px 16px;
 
     position: relative;
     z-index: 1;
 
     display: flex;
     flex-direction: column;
-    justify-content: center; /* 🔥 FIX: texto central vertical */
-    
+    justify-content: flex-end;
+
     color: #ffffff;
     `
 
     export const RestaurantType = styled.span`
     font-size: 18px;
+    font-weight: 400;
     margin-bottom: 8px;
+
+    @media (max-width: 768px) {
+        font-size: 14px;
+    }
     `
 
     export const RestaurantTitle = styled.h1`
     font-size: 32px;
     font-weight: 700;
+
+    @media (max-width: 768px) {
+        font-size: 22px;
+    }
     `
 
     /* ================= PRODUTOS ================= */
@@ -97,15 +116,28 @@ export const TopBar = styled.header`
     export const ProductsSection = styled.section`
     background-color: #fff8f2;
     padding: 56px 0;
+
+    @media (max-width: 768px) {
+        padding: 32px 0;
+    }
     `
 
     export const ProductsContainer = styled.div`
     max-width: 1024px;
     margin: 0 auto;
+    padding: 0 16px;
 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
     `
 
     export const ProductCard = styled.div`
@@ -116,7 +148,7 @@ export const TopBar = styled.header`
     export const ProductImage = styled.img`
     width: 100%;
     height: 167px;
-    background-color: #ccc;
+    object-fit: cover;
     `
 
     export const ProductInfo = styled.div`
@@ -139,35 +171,8 @@ export const TopBar = styled.header`
         background-color: #fff;
         color: #e66767;
         border: none;
-        padding: 4px;
+        padding: 6px;
         font-weight: 700;
         cursor: pointer;
-    }
-    `
-
-    /* ================= FOOTER ================= */
-
-    export const Footer = styled.footer`
-    width: 100%;
-    height: 298px;
-    background-color: #fff1e4;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    `
-
-    export const FooterContent = styled.div`
-    max-width: 1366px;
-    text-align: center;
-
-    img {
-        height: 36px;
-        margin-bottom: 16px;
-    }
-
-    p {
-        font-size: 10px;
-        color: #e66767;
     }
     `

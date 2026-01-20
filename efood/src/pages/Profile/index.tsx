@@ -29,10 +29,7 @@ const Profile = () => {
     const dispatch = useDispatch()
     const items = useSelector((state: RootState) => state.cart.items)
 
-    const quantidade = items.reduce(
-        (acc, item) => acc + item.quantity,
-        0
-    )
+    const quantidade = items.reduce((acc, item) => acc + item.quantity, 0)
 
     const produtoMock: Product = {
         id: 1,
@@ -55,7 +52,7 @@ const Profile = () => {
         dispatch(clearCart())
         setPainelAberto(false)
         setEtapa('cart')
-        navigate('/') // 🔥 VOLTA PRA HOME
+        navigate('/')
     }
 
     return (
@@ -65,7 +62,6 @@ const Profile = () => {
                 <S.TopBarContent>
                     <S.TopBarText>Restaurantes</S.TopBarText>
 
-                    {/* 🔥 VOLTA PRA HOME */}
                     <S.Logo
                         src={logo}
                         alt="efood"
@@ -87,7 +83,13 @@ const Profile = () => {
 
             {/* ================= HERO ================= */}
             <S.Hero>
-                <S.HeroInner />
+                <S.HeroOverlay />
+
+                {/* 🔥 CONTEÚDO ALINHADO NO MESMO EIXO DOS CARDS */}
+                <S.HeroInner>
+                    <S.RestaurantType>Italiana</S.RestaurantType>
+                    <S.RestaurantTitle>La Dolce Vita Trattoria</S.RestaurantTitle>
+                </S.HeroInner>
             </S.Hero>
 
             {/* ================= PRODUTOS ================= */}
@@ -100,8 +102,8 @@ const Profile = () => {
                             <S.ProductInfo>
                                 <h3>Pizza Marguerita</h3>
                                 <p>
-                                    A clássica Marguerita: molho de tomate,
-                                    mussarela derretida, manjericão fresco.
+                                    A clássica Marguerita: molho de tomate, mussarela derretida,
+                                    manjericão fresco.
                                 </p>
 
                                 <button onClick={() => setModalAberto(true)}>
@@ -147,7 +149,6 @@ const Profile = () => {
                 <CheckoutConfirmacao onFinish={finalizarPedido} />
             )}
 
-            {/* ================= FOOTER ================= */}
             <Footer />
         </>
     )
