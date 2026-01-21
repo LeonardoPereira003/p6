@@ -26,4 +26,7 @@ dist-ssr
 
 # Arquivos grandes / instaladores
 *.msi
-jdk-*
+*.exe
+*.zip
+*.tar
+*.gz
