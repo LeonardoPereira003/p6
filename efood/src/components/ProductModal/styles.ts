@@ -2,42 +2,51 @@
 
     /*
     ============================
-    OVERLAY
+    OVERLAY DO MODAL
     ============================
-    Fundo escuro que cobre a tela inteira
+
+    - Camada escura por cima da página
+    - Centraliza o modal na tela
+    - Scroll ativado no mobile
     */
     export const Overlay = styled.div`
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.75);
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    padding: 16px;
+    z-index: 1000;
     `
 
     /*
     ============================
-    MODAL CONTAINER
+    MODAL PRINCIPAL
     ============================
+
+    - Layout em duas colunas no desktop
+    - Layout em coluna única no mobile
     */
     export const Modal = styled.div`
     background-color: #e66767;
-    width: 1024px;
-    max-width: 95%;
-    max-height: 90vh;
+    color: #fff;
 
-    display: flex;
+    max-width: 1024px;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    padding: 32px;
     position: relative;
-    overflow: hidden;
 
-    /* 🔥 MOBILE */
     @media (max-width: 768px) {
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        max-height: 100vh;
-        border-radius: 0;
+        grid-template-columns: 1fr;
+        padding: 16px;
     }
     `
 
@@ -54,53 +63,40 @@
     background: none;
     border: none;
     color: #fff;
-    font-size: 18px;
+
+    font-size: 20px;
     cursor: pointer;
-    z-index: 10;
     `
 
     /*
     ============================
-    IMAGEM
+    IMAGEM DO PRODUTO
     ============================
+
+    - Sempre visível
+    - Não estoura no mobile
     */
     export const Image = styled.img`
-    width: 50%;
+    width: 100%;
+    height: auto;
+    max-height: 360px;
     object-fit: cover;
-
-    /* 🔥 MOBILE */
-    @media (max-width: 768px) {
-        width: 100%;
-        height: 240px;
-    }
     `
 
     /*
     ============================
-    CONTEÚDO
+    CONTEÚDO TEXTUAL
     ============================
     */
     export const Content = styled.div`
-    width: 50%;
-    padding: 32px;
-    color: #fff;
-
     display: flex;
     flex-direction: column;
-    gap: 16px;
-
-    overflow-y: auto;
-
-    /* 🔥 MOBILE */
-    @media (max-width: 768px) {
-        width: 100%;
-        padding: 24px 16px;
-    }
+    gap: 12px;
     `
 
-    export const Title = styled.h3`
-    font-size: 18px;
-    font-weight: 900;
+    export const Title = styled.h2`
+    font-size: 24px;
+    font-weight: 700;
     `
 
     export const Description = styled.p`
@@ -118,9 +114,10 @@
 
     background-color: #fff;
     color: #e66767;
-    border: none;
 
+    border: none;
     padding: 8px;
+
     font-weight: 700;
     cursor: pointer;
     `

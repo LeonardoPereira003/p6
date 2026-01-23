@@ -8,33 +8,22 @@ type Props = {
 
 /*
 ============================
-COMPONENTE ProductModal
+MODAL DE PRODUTO
 ============================
 
-Modal responsável por exibir:
-- Imagem do produto
-- Nome
-- Descrição
-- Porção
-- Botão de ação
-
-✔ Usa imagem LOCAL (assets)
-✔ Não depende de internet
-✔ Compatível com Figma
-✔ Responsivo
+- Exibe detalhes do produto
+- Responsivo
+- Controlado pelo estado do Profile
 */
 const ProductModal = ({ onClose, onAdd }: Props) => {
     return (
         <S.Overlay>
             <S.Modal>
-                {/* Botão de fechar */}
+                {/* Botão fechar */}
                 <S.CloseButton onClick={onClose}>×</S.CloseButton>
 
                 {/* Imagem do produto */}
-                <S.Image
-                    src={pizzaImg}
-                    alt="Pizza Marguerita"
-                />
+                <S.Image src={pizzaImg} alt="Pizza Marguerita" />
 
                 {/* Conteúdo textual */}
                 <S.Content>
