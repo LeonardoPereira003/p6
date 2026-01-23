@@ -1,37 +1,60 @@
     import styled from 'styled-components'
 
+    /*
+    ================================
+    SEÇÃO PRINCIPAL DA HOME
+    ================================
+
+    Responsável pelo fundo e espaçamento
+    da lista de restaurantes.
+    */
     export const Section = styled.section`
-    background-color: #fff1e4;
-    padding: 40px 0;
+    background-color: #fff8f2;
+    padding: 80px 0;
+
+    /* Ajuste de espaçamento em telas menores */
+    @media (max-width: 768px) {
+        padding: 48px 0;
+    }
     `
 
+    /*
+    ================================
+    CONTAINER CENTRAL
+    ================================
+
+    - Largura máxima definida pelo Figma (1024px)
+    - Centralizado horizontalmente
+    - Padding lateral para evitar colar nas bordas no mobile
+    */
     export const Container = styled.div`
-    max-width: 1366px;
+    max-width: 1024px;
     margin: 0 auto;
-    padding: 0 24px;
-    text-align: center;
+    padding: 0 16px;
     `
 
-    export const Logo = styled.img`
-    height: 36px;
-    margin-bottom: 16px;
-    `
+    /*
+    ================================
+    GRID DE RESTAURANTES
+    ================================
 
-    export const SocialLinks = styled.div`
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 16px;
-    `
+    - Desktop: 2 colunas (conforme Figma)
+    - Tablet: 2 colunas com menor espaçamento
+    - Mobile: 1 coluna
+    */
+    export const Grid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
 
-    export const SocialIcon = styled.img`
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    `
+    /* Tablet */
+    @media (max-width: 1024px) {
+        gap: 48px;
+    }
 
-    export const Text = styled.p`
-    font-size: 10px;
-    line-height: 14px;
-    color: #e66767;
+    /* Mobile */
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
     `

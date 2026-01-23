@@ -1,12 +1,28 @@
 import * as S from './styles'
 import pizzaImg from '../../assets/pizza.jpg'
 
-// Props recebidas do Profile
 type Props = {
-    onClose: () => void      // fecha o modal
-    onAdd: () => void        // adiciona item ao carrinho
+    onClose: () => void
+    onAdd: () => void
 }
 
+/*
+============================
+COMPONENTE ProductModal
+============================
+
+Modal responsável por exibir:
+- Imagem do produto
+- Nome
+- Descrição
+- Porção
+- Botão de ação
+
+✔ Usa imagem LOCAL (assets)
+✔ Não depende de internet
+✔ Compatível com Figma
+✔ Responsivo
+*/
 const ProductModal = ({ onClose, onAdd }: Props) => {
     return (
         <S.Overlay>
@@ -14,26 +30,26 @@ const ProductModal = ({ onClose, onAdd }: Props) => {
                 {/* Botão de fechar */}
                 <S.CloseButton onClick={onClose}>×</S.CloseButton>
 
+                {/* Imagem do produto */}
+                <S.Image
+                    src={pizzaImg}
+                    alt="Pizza Marguerita"
+                />
+
+                {/* Conteúdo textual */}
                 <S.Content>
-                    {/* Imagem do produto */}
-                    <img src={pizzaImg} alt="Pizza Marguerita" />
+                    <S.Title>Pizza Marguerita</S.Title>
 
-                    {/* Informações do produto */}
-                    <S.Info>
-                        <h3>Pizza Marguerita</h3>
+                    <S.Description>
+                        A clássica Marguerita: molho de tomate suculento,
+                        mussarela derretida, manjericão fresco e um toque de azeite.
+                    </S.Description>
 
-                        <p>
-                            A clássica Marguerita: molho de tomate suculento,
-                            mussarela derretida, manjericão fresco e um toque de azeite.
-                        </p>
+                    <S.Portion>Serve: 2 pessoas</S.Portion>
 
-                        <span>Serve: 2 pessoas</span>
-
-                        {/* Botão que adiciona ao carrinho */}
-                        <button onClick={onAdd}>
-                            Adicionar ao carrinho
-                        </button>
-                    </S.Info>
+                    <S.Button onClick={onAdd}>
+                        Adicionar ao carrinho
+                    </S.Button>
                 </S.Content>
             </S.Modal>
         </S.Overlay>

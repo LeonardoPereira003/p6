@@ -1,85 +1,80 @@
-// Hooks do React
-import { useEffect, useState } from 'react'
+    // Hooks do React
+    import { useEffect, useState } from 'react'
 
-// Importa o Header
-import Header from '../../components/Header'
+    // Componentes
+    import Header from '../../components/Header'
+    import Footer from '../../components/Footer'
+    import RestaurantCard from '../../components/RestaurantCard'
 
-// Importa o Footer
-import Footer from '../../components/Footer'
+    // Estilos da página
+    import * as S from './styles'
 
-// Importa o Card de restaurante
-import RestaurantCard from '../../components/RestaurantCard'
+    // Serviço de API
+    import { api } from '../../services/api'
 
-// Serviço de API (axios configurado)
-import { api } from '../../services/api'
+    // Tipagem
+    import type { Restaurant } from '../../types/Restaurant'
 
-// Tipagem oficial do restaurante
-import type { Restaurant } from '../../types/Restaurant'
+    /*
+    ================================
+    COMPONENTE HOME
+    ================================
 
-
-// =====================
-// COMPONENTE HOME
-// =====================
-const Home = () => {
-    // Estado que armazena os restaurantes vindos da API
+    Responsável por:
+    - Exibir o Header
+    - Buscar restaurantes da API
+    - Renderizar a lista conforme o layout do Figma
+    - Exibir o Footer
+    */
+    const Home = () => {
+    /*
+        Estado que armazena a lista de restaurantes
+        retornada pela API
+    */
     const [restaurants, setRestaurants] = useState<Restaurant[]>([])
 
-    // useEffect executa quando a página carrega
+    /*
+        Executa a requisição assim que a página carrega
+    */
     useEffect(() => {
-        // Faz requisição para a API da EBAC
         api
-            .get('/restaurantes')
-            .then((response) => {
-                // Salva os dados no estado
-                setRestaurants(response.data)
-            })
-            .catch((error) => {
-                console.error('Erro ao buscar restaurantes:', error)
-            })
+        .get('/restaurantes')
+        .then((response) => {
+            setRestaurants(response.data)
+        })
+        .catch((error) => {
+            console.error('Erro ao buscar restaurantes:', error)
+        })
     }, [])
 
     return (
         <>
-            {/* HEADER */}
-            <Header />
+        {/* HEADER DA HOME */}
+        <Header />
 
-            {/* LISTA DE RESTAURANTES */}
-            <section
-                style={{
-                    backgroundColor: '#FFF8F2',
-                    padding: '80px 0'
-                }}
-            >
-                {/* CONTAINER CENTRAL (FIGMA = 1024px) */}
-                <div
-                    style={{
-                        maxWidth: '1024px',
-                        margin: '0 auto',
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        gap: '80px'
-                    }}
-                >
-                    {/* MAPEIA OS RESTAURANTES DA API */}
-                    {restaurants.map((restaurant) => (
-                        <RestaurantCard
-                            key={restaurant.id}
-                            id={restaurant.id}
-                            title={restaurant.titulo}
-                            description={restaurant.descricao}
-                            image={restaurant.capa}
-                            tag={restaurant.tipo}
-                            rating={restaurant.avaliacao}
-                        />
-                    ))}
-                </div>
-            </section>
+        {/* SEÇÃO DE RESTAURANTES */}
+        <S.Section>
+            <S.Container>
+            <S.Grid>
+                {restaurants.map((restaurant) => (
+                <RestaurantCard
+                    key={restaurant.id}
+                    id={restaurant.id}
+                    title={restaurant.titulo}
+                    description={restaurant.descricao}
+                    image={restaurant.capa}
+                    tag={restaurant.tipo}
+                    rating={restaurant.avaliacao}
+                />
+                ))}
+            </S.Grid>
+            </S.Container>
+        </S.Section>
 
-            {/* FOOTER */}
-            <Footer />
+        {/* FOOTER */}
+        <Footer />
         </>
     )
-}
+    }
 
-// Export obrigatório
-export default Home
+    export default Home
