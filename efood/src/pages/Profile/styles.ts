@@ -13,7 +13,6 @@
     height: 186px;
     background-color: #fff8f2;
 
-    /* ✅ Pattern SEM TEXTO */
     background-image: url(${vectorBg});
     background-repeat: repeat-x;
     background-position: center -24px;
@@ -27,12 +26,10 @@
     }
     `
 
-
     export const TopBarContent = styled.div`
     max-width: 1024px;
     width: 100%;
     height: 100%;
-
     padding: 0 16px;
 
     display: flex;
@@ -60,11 +57,8 @@
 
     /*
     ==================================================
-    HERO / BANNER DO PERFIL
+    HERO / BANNER DO PERFIL (FIGMA)
     ==================================================
-    ✔ imagem limpa
-    ✔ texto criado via JSX
-    ✔ alinhado com os cards
     */
 
     export const Hero = styled.section`
@@ -99,16 +93,10 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center; /* 🔧 Figma centraliza verticalmente */
-
+    justify-content: flex-end; /* 🔧 CORREÇÃO: textos embaixo */
     color: #ffffff;
     `
 
-    /*
-    🔴 CORREÇÃO DO PROFESSOR
-    Tipo do restaurante:
-    - Figma: 32px / weight 100
-    */
     export const RestaurantType = styled.span`
     font-size: 32px;
     font-weight: 100;
@@ -119,11 +107,6 @@
     }
     `
 
-    /*
-    🔴 CORREÇÃO DO PROFESSOR
-    Nome do restaurante:
-    - Figma: 32px / weight 900
-    */
     export const RestaurantTitle = styled.h1`
     font-size: 32px;
     font-weight: 900;

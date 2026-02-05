@@ -51,10 +51,10 @@
 
     export const Logo = styled.img`
     width: 125px;
-    height: auto;
+    height: 57.5px;
 
     position: absolute;
-    top: 64px;
+    top: 40px;
     left: 50%;
     transform: translateX(-50%);
 
@@ -73,18 +73,19 @@
     - font-weight alterado de 700 → 900 (conforme Figma)
     */
 
-    export const Title = styled.h1`
+export const Title = styled.h1`
     font-family: 'Roboto', sans-serif;
-    font-size: 32px;
-    font-weight: 900; /* 🔴 CORREÇÃO PRINCIPAL DO PROFESSOR */
-    line-height: 40px;
+    font-size: 36px;
+    font-weight: 900; /* conforme Figma */
+    line-height: 100%;
     color: #e66767;
-
     text-align: center;
-    max-width: 640px;
+
+    /* largura fiel ao layout do Figma */
+    max-width: 540px;
 
     position: absolute;
-    top: 220px; /* ajuste fino para alinhar melhor ao Figma */
+    top: 220px;
     left: 50%;
     transform: translateX(-50%);
 
@@ -100,4 +101,5 @@
         line-height: 26px;
         top: 140px;
     }
-    `
+`
+

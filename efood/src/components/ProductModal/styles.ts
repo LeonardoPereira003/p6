@@ -29,19 +29,22 @@
 
     - Layout em duas colunas no desktop
     - Layout em coluna única no mobile
+    - Ajustes finos de largura e espaçamento (Figma)
     */
     export const Modal = styled.div`
     background-color: #e66767;
     color: #fff;
 
-    max-width: 1024px;
+    /* Figma usa um modal visualmente mais largo */
+    max-width: 1100px;
     width: 100%;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 32px;
 
-    padding: 32px;
+    /* Padding maior no desktop conforme layout */
+    padding: 40px;
     position: relative;
 
     @media (max-width: 768px) {
@@ -73,13 +76,13 @@
     IMAGEM DO PRODUTO
     ============================
 
-    - Sempre visível
-    - Não estoura no mobile
+    - Destaque maior conforme Figma
+    - Mantém proporção e não estoura no mobile
     */
     export const Image = styled.img`
     width: 100%;
-    height: auto;
-    max-height: 360px;
+    height: 100%;
+    max-height: 420px;
     object-fit: cover;
     `
 
@@ -91,7 +94,7 @@
     export const Content = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     `
 
     export const Title = styled.h2`
@@ -115,9 +118,13 @@
     background-color: #fff;
     color: #e66767;
 
-    border: none;
-    padding: 8px;
+    /* Botão mais alto e confortável (Figma) */
+    padding: 12px 16px;
 
     font-weight: 700;
     cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+    }
     `

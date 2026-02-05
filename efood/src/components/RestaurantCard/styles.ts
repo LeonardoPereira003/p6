@@ -6,17 +6,26 @@
     ============================
 
     Ajustes aplicados:
-    ✔ Cores mantidas (já estavam corretas no Figma)
-    ✔ Responsividade refinada (sem refatorar)
     ✔ Estrutura original preservada
+    ✔ Cores mantidas (fiéis ao Figma)
+    ✔ Padding interno exatamente como no Figma (16px)
+    ✔ Altura mínima definida conforme Figma (398px)
+    → evita espaços estranhos com textos menores
+    ✔ Nenhuma alteração estrutural ou de lógica
     */
 
     export const Card = styled.div`
     background-color: #ffffff;
     border: 1px solid #e66767;
 
+    /* Altura mínima conforme Figma (melhor comportamento com dados reais) */
+    min-height: 398px;
+
     display: flex;
     flex-direction: column;
+
+    /* Espaçamento externo entre os cards */
+    margin-bottom: 32px;
 
     overflow: hidden;
     `
@@ -39,7 +48,7 @@
 
     export const Tag = styled.span`
     position: absolute;
-    top: 16px;
+    top: 20px; /* Conforme Figma */
     right: 16px;
 
     background-color: #e66767;
@@ -56,6 +65,7 @@
     `
 
     export const Content = styled.div`
+    /* Padding exatamente como no Figma */
     padding: 16px;
 
     flex: 1;

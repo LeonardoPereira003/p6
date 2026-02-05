@@ -10,9 +10,17 @@
     }
 
     body {
+        /* Fonte definida no Figma */
         font-family: 'Roboto', sans-serif;
-        background-color: #FFF8F2;
-        color: #4B4B4B;
+
+        /* Figma usa fundo branco como base */
+        background-color: #FFFFFF;
+
+        /* Cor padrão de texto mais escura, conforme layout */
+        color: #333333;
+
+        /* Peso padrão do texto no Figma */
+        font-weight: 400;
     }
 
     a {
