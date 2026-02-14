@@ -47,17 +47,20 @@
     }
     `
 
+    /* ✅ LOGO EXATA DO FIGMA */
     export const Logo = styled.img`
-    height: 36px;
+    width: 125px;
+    height: 57.5px;
 
     @media (max-width: 768px) {
-        height: 28px;
+        width: 96px;
+        height: auto;
     }
     `
 
     /*
     ==================================================
-    HERO / BANNER DO PERFIL (FIGMA)
+    HERO / BANNER
     ==================================================
     */
 
@@ -68,57 +71,72 @@
     background-image: url(${heroImg});
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 
     position: relative;
-
-    @media (max-width: 768px) {
-        height: 220px;
-    }
     `
 
+    /* ✅ Overlay correto (50%) */
     export const HeroOverlay = styled.div`
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     `
 
+    /* Container interno alinhado ao grid 1024 */
     export const HeroInner = styled.div`
     max-width: 1024px;
     height: 100%;
     margin: 0 auto;
-    padding: 24px 16px;
+    padding: 0 16px 32px 16px;
 
     position: relative;
     z-index: 1;
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* 🔧 CORREÇÃO: textos embaixo */
+    justify-content: flex-end;
+
     color: #ffffff;
     `
 
+    /* ✅ ITALIANA — exatamente como no Figma */
     export const RestaurantType = styled.span`
+    font-family: 'Roboto', sans-serif;
     font-size: 32px;
     font-weight: 100;
+    line-height: 100%;
+    color: #ffffff;
+
     margin-bottom: 8px;
+
+    /* sobe somente ele */
+    transform: translateY(-150px);
 
     @media (max-width: 768px) {
         font-size: 20px;
     }
     `
 
+    /* ✅ TÍTULO PRINCIPAL */
     export const RestaurantTitle = styled.h1`
+    font-family: 'Roboto', sans-serif;
     font-size: 32px;
     font-weight: 900;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #ffffff;
+    margin: 0;
 
     @media (max-width: 768px) {
         font-size: 22px;
     }
-    `
+`
+
 
     /*
     ==================================================
-    LISTAGEM DE PRODUTOS
+    PRODUTOS
     ==================================================
     */
 
@@ -162,22 +180,25 @@
 
     export const ProductInfo = styled.div`
     padding: 8px;
-    color: #fff;
+    color: #ffffff;
 
     h3 {
         font-size: 16px;
         margin-bottom: 8px;
+        font-weight: 700;
     }
 
     p {
         font-size: 14px;
         line-height: 22px;
         margin-bottom: 8px;
+        font-weight: 400;
+        color: #ffffff; /* 🔥 MESMA COR DO TÍTULO */
     }
 
     button {
         width: 100%;
-        background-color: #fff;
+        background-color: #ffffff;
         color: #e66767;
         border: none;
         padding: 6px;
