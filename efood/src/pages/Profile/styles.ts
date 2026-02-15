@@ -198,7 +198,7 @@
 
     button {
         width: 100%;
-        background-color: #ffffff;
+        background-color: #FFEBD9;
         color: #e66767;
         border: none;
         padding: 6px;

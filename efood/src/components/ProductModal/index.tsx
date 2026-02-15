@@ -1,48 +1,44 @@
-import * as S from './styles'
-import pizzaImg from '../../assets/pizza.jpg'
+    import * as S from './styles'
 
-type Props = {
+    type Props = {
+    title: string
+    description: string
+    image: string
+    price: number
+    portion: string
     onClose: () => void
     onAdd: () => void
-}
+    }
 
-/*
-============================
-MODAL DE PRODUTO
-============================
-
-- Exibe detalhes do produto
-- Responsivo
-- Controlado pelo estado do Profile
-*/
-const ProductModal = ({ onClose, onAdd }: Props) => {
+    const ProductModal = ({
+    title,
+    description,
+    image,
+    price,
+    portion,
+    onClose,
+    onAdd
+    }: Props) => {
     return (
         <S.Overlay>
-            <S.Modal>
-                {/* Botão fechar */}
-                <S.CloseButton onClick={onClose}>×</S.CloseButton>
+        <S.Modal>
+            <S.Image src={image} alt={title} />
 
-                {/* Imagem do produto */}
-                <S.Image src={pizzaImg} alt="Pizza Marguerita" />
+            <S.Content>
+            <S.CloseButton onClick={onClose}>×</S.CloseButton>
 
-                {/* Conteúdo textual */}
-                <S.Content>
-                    <S.Title>Pizza Marguerita</S.Title>
+            <h2>{title}</h2>
+            <p>{description}</p>
 
-                    <S.Description>
-                        A clássica Marguerita: molho de tomate suculento,
-                        mussarela derretida, manjericão fresco e um toque de azeite.
-                    </S.Description>
+            <strong>{portion}</strong>
 
-                    <S.Portion>Serve: 2 pessoas</S.Portion>
-
-                    <S.Button onClick={onAdd}>
-                        Adicionar ao carrinho
-                    </S.Button>
-                </S.Content>
-            </S.Modal>
+            <S.Button onClick={onAdd}>
+                Adicionar ao carrinho - R$ {price.toFixed(2)}
+            </S.Button>
+            </S.Content>
+        </S.Modal>
         </S.Overlay>
     )
-}
+    }
 
-export default ProductModal
+    export default ProductModal

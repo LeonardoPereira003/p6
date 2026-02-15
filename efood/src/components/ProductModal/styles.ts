@@ -110,20 +110,23 @@
     export const Portion = styled.span`
     font-size: 14px;
     font-weight: 700;
+    margin: 16px 0;
     `
 
     export const Button = styled.button`
     margin-top: auto;
 
-    background-color: #fff;
+    background-color: #FFEBD9;
     color: #e66767;
+    border: none;
 
     /* Botão mais alto e confortável (Figma) */
-    padding: 12px 16px;
+    padding: 8px 16px;
+    width: 240px;
+    heigth: 24px;
 
     font-weight: 700;
     cursor: pointer;
-
     &:hover {
         opacity: 0.9;
     }
