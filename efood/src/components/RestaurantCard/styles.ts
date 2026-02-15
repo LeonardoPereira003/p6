@@ -78,7 +78,7 @@
     margin-top: auto;
 
     background-color: #e66767;
-    color: #ffffff;
+    color: #FFEBD9;
 
     border: none;
     padding: 6px 12px;

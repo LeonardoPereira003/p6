@@ -31,7 +31,6 @@
     cursor: pointer;
     `
 
-    /*  LISTA COM SCROLL */
     export const Items = styled.ul`
     list-style: none;
     padding: 32px 16px 0 16px;
@@ -74,10 +73,21 @@
         background: none;
         border: none;
         cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 24px;
+        height: 24px;
+
+        img {
+        width: 16px;
+        height: 16px;
+        }
     }
     `
 
-    /*  FIXO NO FUNDO */
     export const Summary = styled.div`
     padding: 16px;
     border-top: 1px solid rgba(255, 255, 255, 0.4);

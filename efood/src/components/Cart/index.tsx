@@ -2,7 +2,7 @@ import * as S from './styles'
 import { useDispatch, useSelector } from 'react-redux'
 import type { RootState } from '../../store'
 import { removeItem } from '../../store/cartSlice'
-
+import lixoIcon from '../../assets/lixo.png'
 // =====================
 // PROPS DO CARRINHO
 // =====================
@@ -15,7 +15,6 @@ const Cart = ({ onClose, onNext }: Props) => {
     const dispatch = useDispatch()
     const items = useSelector((state: RootState) => state.cart.items)
 
-    // 🔥 TOTAL CORRETO
     const total = items.reduce(
         (acc, item) => acc + item.product.preco * item.quantity,
         0
@@ -51,7 +50,10 @@ const Cart = ({ onClose, onNext }: Props) => {
                                                 dispatch(removeItem(item.product.id))
                                             }
                                         >
-                                            🗑️
+                                            <img
+                                                src={lixoIcon}
+                                                alt="Remover item"
+                                            />
                                         </button>
                                     </S.Item>
                                 ))

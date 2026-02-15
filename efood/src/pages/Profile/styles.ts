@@ -180,7 +180,7 @@
 
     export const ProductInfo = styled.div`
     padding: 8px;
-    color: #ffffff;
+    color: #FFEBD9;
 
     h3 {
         font-size: 16px;
@@ -192,13 +192,14 @@
         font-size: 14px;
         line-height: 22px;
         margin-bottom: 8px;
-        font-weight: 400;
-        color: #ffffff; /* 🔥 MESMA COR DO TÍTULO */
+        font-weight: 700;
+        color: #FFEBD9; 
     }
 
     button {
         width: 100%;
         background-color: #FFEBD9;
+        height: 24px;
         color: #e66767;
         border: none;
         padding: 6px;
