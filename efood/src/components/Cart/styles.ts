@@ -16,7 +16,6 @@
     height: 100vh;
 
     background-color: #e66767;
-    padding: 32px 16px;
 
     display: flex;
     flex-direction: column;
@@ -24,7 +23,7 @@
 
     export const CloseArea = styled.span`
     position: absolute;
-    top: 16px;
+    top: 10px;
     right: 16px;
 
     color: #fff;
@@ -32,14 +31,15 @@
     cursor: pointer;
     `
 
+    /*  LISTA COM SCROLL */
     export const Items = styled.ul`
     list-style: none;
-    margin-top: 32px;
-    flex: 1;
+    padding: 32px 16px 0 16px;
+    overflow-y: auto;
     `
 
     export const Item = styled.li`
-    background-color: #fff;
+    background-color: #ffe8d9;
     padding: 8px;
     margin-bottom: 16px;
 
@@ -57,9 +57,10 @@
         flex: 1;
 
         h4 {
-        font-size: 14px;
-        margin-bottom: 4px;
+        font-size: 18px;
+        font-weight: 700;
         color: #e66767;
+        margin-bottom: 8px;
         }
 
         span {
@@ -73,13 +74,13 @@
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 16px;
     }
     `
 
+    /*  FIXO NO FUNDO */
     export const Summary = styled.div`
+    padding: 16px;
     border-top: 1px solid rgba(255, 255, 255, 0.4);
-    padding-top: 16px;
 
     div {
         display: flex;
@@ -95,7 +96,7 @@
 
     button {
         width: 100%;
-        background-color: #fff;
+        background-color: #ffe8d9;
         color: #e66767;
         border: none;
         padding: 8px;

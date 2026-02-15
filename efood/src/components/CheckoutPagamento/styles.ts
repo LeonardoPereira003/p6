@@ -17,12 +17,14 @@
 
     background-color: #e66767;
     padding: 32px 16px;
-
-    color: #fff;
+    
+    color: #ffe8d9;
+    
 
     h2 {
         margin-bottom: 16px;
         font-size: 18px;
+    
     }
 
     form {
@@ -32,14 +34,19 @@
     }
 
     label {
-        font-size: 12px;
+        color: #ffe8d9;
+        font-size: 14px;
         font-weight: 700;
     }
 
     input {
         padding: 8px;
+        color: #4b4b4b;
+        font-weight: 700;
         border: none;
         font-size: 14px;
+        background-color: #ffe8d9;
+        
     }
     `
 
@@ -69,13 +76,13 @@
     }
 
     button:first-child {
-        background-color: #fff;
+        background-color: #ffe8d9;
         color: #e66767;
     }
 
     button:last-child {
-        background-color: transparent;
+        background-color: #ffe8d9;
         border: 1px solid #fff;
-        color: #fff;
+        color: #e66767;
     }
     `

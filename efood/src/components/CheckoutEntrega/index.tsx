@@ -19,13 +19,26 @@ const CheckoutEntrega = ({ onBack, onNext }: Props) => {
                     <input placeholder="Nome do recebedor" />
 
                     <label>Endereço</label>
-                    <input placeholder="Rua, número e complemento" />
+                    <input placeholder="Rua e número" />
 
                     <label>Cidade</label>
                     <input placeholder="Cidade" />
 
-                    <label>CEP</label>
-                    <input placeholder="00000-000" />
+                    {/* 🔥 CEP + Número lado a lado */}
+                    <S.Row>
+                        <S.Field>
+                            <label>CEP</label>
+                            <input placeholder="00000-000" />
+                        </S.Field>
+
+                        <S.Field>
+                            <label>Número</label>
+                            <input placeholder="00000000" />
+                        </S.Field>
+                    </S.Row>
+
+                    <label>Complemento (opcional)</label>
+                    <input placeholder="Apartamento, bloco..." />
 
                     <S.Actions>
                         <button type="button" onClick={onNext}>

@@ -22,7 +22,7 @@
     flex-direction: column;
 
     h2 {
-        color: #fff;
+        color: #ffe8d9;
         font-size: 16px;
         margin-bottom: 16px;
     }
@@ -34,20 +34,36 @@
     }
 
     label {
-        color: #fff;
+        color: #ffe8d9;
         font-size: 14px;
         font-weight: 700;
     }
 
     input {
+        color: #4b4b4b;
+        font-weight: 700;
+        width: 100%;
         height: 32px;
         padding: 0 8px;
         border: none;
         font-size: 14px;
+        background-color: #ffe8d9;
     }
     `
 
-    /* 🔥 ESSE ERA O CARA QUE FALTAVA */
+    /* 🔥 NOVO: LINHA PARA CAMPOS LADO A LADO */
+    export const Row = styled.div`
+    display: flex;
+    gap: 8px;
+    `
+
+    /* 🔥 NOVO: CONTAINER DE CADA CAMPO */
+    export const Field = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    `
+
     export const Actions = styled.div`
     margin-top: 16px;
     display: flex;
@@ -58,17 +74,12 @@
         height: 32px;
         border: none;
         font-weight: 700;
+        background-color: #ffe8d9;
+        color: #e66767;
         cursor: pointer;
     }
 
-    button:first-child {
-        background-color: #fff;
-        color: #e66767;
-    }
-
     button:last-child {
-        background: transparent;
         border: 1px solid #fff;
-        color: #fff;
     }
     `

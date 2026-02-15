@@ -35,7 +35,7 @@
 
     button {
         margin-top: auto;
-        background-color: #fff;
+        background-color: #ffe8d9;
         color: #e66767;
         border: none;
         padding: 8px;

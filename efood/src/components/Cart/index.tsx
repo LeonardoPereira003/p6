@@ -15,6 +15,7 @@ const Cart = ({ onClose, onNext }: Props) => {
     const dispatch = useDispatch()
     const items = useSelector((state: RootState) => state.cart.items)
 
+    // 🔥 TOTAL CORRETO
     const total = items.reduce(
         (acc, item) => acc + item.product.preco * item.quantity,
         0
@@ -26,28 +27,35 @@ const Cart = ({ onClose, onNext }: Props) => {
                 <S.CloseArea onClick={onClose}>×</S.CloseArea>
 
                 {items.length === 0 ? (
-                    <p>Carrinho vazio</p>
+                    <p style={{ color: '#fff' }}>Carrinho vazio</p>
                 ) : (
                     <>
                         <S.Items>
-                            {items.map((item) => (
-                                <S.Item key={item.product.id}>
-                                    <img src={item.product.foto} alt={item.product.nome} />
+                            {items.map((item) =>
+                                Array.from({ length: item.quantity }).map((_, index) => (
+                                    <S.Item key={`${item.product.id}-${index}`}>
+                                        <img
+                                            src={item.product.foto}
+                                            alt={item.product.nome}
+                                        />
 
-                                    <div>
-                                        <h4>{item.product.nome}</h4>
-                                        <span>R$ {item.product.preco.toFixed(2)}</span>
-                                    </div>
+                                        <div>
+                                            <h4>{item.product.nome}</h4>
+                                            <span>
+                                                R$ {item.product.preco.toFixed(2)}
+                                            </span>
+                                        </div>
 
-                                    <button
-                                        onClick={() =>
-                                            dispatch(removeItem(item.product.id))
-                                        }
-                                    >
-                                        🗑️
-                                    </button>
-                                </S.Item>
-                            ))}
+                                        <button
+                                            onClick={() =>
+                                                dispatch(removeItem(item.product.id))
+                                            }
+                                        >
+                                            🗑️
+                                        </button>
+                                    </S.Item>
+                                ))
+                            )}
                         </S.Items>
 
                         <S.Summary>
