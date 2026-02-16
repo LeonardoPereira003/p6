@@ -9,14 +9,17 @@
 
     export const Container = styled.aside`
     position: fixed;
-    top: 0;
-    right: 0;
+        top: 0;
+        right: 0;
 
-    width: 360px;
-    height: 100vh;
+        width: 360px;
+        height: 100vh;
 
-    background-color: #e66767;
-    padding: 32px 16px;
+        background-color: #e66767;
+        padding: 32px 16px;
+
+        display: flex;
+        flex-direction: column;
 
     color: #ffe8d9;
 
@@ -37,22 +40,24 @@
     }
 
     input {
-        padding: 8px;
         color: #4b4b4b;
         font-weight: 700;
+        width: 100%;
+        height: 32px;
+        padding: 8px;
         border: none;
         font-size: 14px;
         background-color: #ffe8d9;
     }
     `
 
-    /* 🔥 Linha horizontal */
+    /*  Linha horizontal */
     export const Row = styled.div`
     display: flex;
     gap: 16px;
     `
 
-    /* 🔥 Campo padrão (maior) */
+    /*  Campo padrão (maior) */
     export const Field = styled.div`
     flex: 1;
     display: flex;

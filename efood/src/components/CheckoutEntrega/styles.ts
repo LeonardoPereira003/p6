@@ -44,7 +44,7 @@
         font-weight: 700;
         width: 100%;
         height: 32px;
-        padding: 0 8px;
+        padding: 8px;
         border: none;
         font-size: 14px;
         background-color: #ffe8d9;
