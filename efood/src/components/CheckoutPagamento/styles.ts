@@ -17,24 +17,21 @@
 
     background-color: #e66767;
     padding: 32px 16px;
-    
+
     color: #ffe8d9;
-    
 
     h2 {
         margin-bottom: 16px;
         font-size: 18px;
-    
     }
 
     form {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 12px;
     }
 
     label {
-        color: #ffe8d9;
         font-size: 14px;
         font-weight: 700;
     }
@@ -46,20 +43,29 @@
         border: none;
         font-size: 14px;
         background-color: #ffe8d9;
-        
     }
     `
 
+    /* 🔥 Linha horizontal */
     export const Row = styled.div`
     display: flex;
     gap: 16px;
+    `
 
-    div {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
+    /* 🔥 Campo padrão (maior) */
+    export const Field = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    `
+
+    /* Campo menor (CVV, Mês, Ano) */
+    export const SmallField = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     `
 
     export const Actions = styled.div`

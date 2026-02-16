@@ -11,10 +11,8 @@ type Props = {
 }
 
 const CheckoutPagamento = ({ onBack, onFinish }: Props) => {
-    // 🔥 Pega os itens do carrinho
     const items = useSelector((state: RootState) => state.cart.items)
 
-    // 🔥 Calcula o total corretamente
     const total = items.reduce(
         (acc, item) => acc + item.product.preco * item.quantity,
         0
@@ -23,27 +21,36 @@ const CheckoutPagamento = ({ onBack, onFinish }: Props) => {
     return (
         <S.Overlay>
             <S.Container>
-                <h2>
-                    Pagamento – Valor a pagar R$ {total.toFixed(2)}
-                </h2>
+                <h2>Pagamento - Valor a pagar R$ {total.toFixed(2)}</h2>
 
                 <form>
                     <label>Nome no cartão</label>
                     <input placeholder="Nome impresso no cartão" />
 
-                    <label>Número do cartão</label>
-                    <input placeholder="0000 0000 0000 0000" />
-
+                    {/* Número + CVV */}
                     <S.Row>
-                        <div style={{ flex: 1 }}>
+                        <S.Field>
+                            <label>Número do cartão</label>
+                            <input placeholder="0000 0000 0000 0000" />
+                        </S.Field>
+
+                        <S.SmallField>
                             <label>CVV</label>
                             <input placeholder="123" />
-                        </div>
+                        </S.SmallField>
+                    </S.Row>
 
-                        <div style={{ flex: 1 }}>
-                            <label>Validade</label>
-                            <input placeholder="MM/AA" />
-                        </div>
+                    {/* Mês + Ano */}
+                    <S.Row>
+                        <S.SmallField>
+                            <label>Mês de vencimento</label>
+                            <input placeholder="MM" />
+                        </S.SmallField>
+
+                        <S.SmallField>
+                            <label>Ano de vencimento</label>
+                            <input placeholder="AA" />
+                        </S.SmallField>
                     </S.Row>
 
                     <S.Actions>
@@ -52,7 +59,7 @@ const CheckoutPagamento = ({ onBack, onFinish }: Props) => {
                         </button>
 
                         <button type="button" onClick={onBack}>
-                            Voltar para entrega
+                            Voltar para a edição de endereço
                         </button>
                     </S.Actions>
                 </form>
