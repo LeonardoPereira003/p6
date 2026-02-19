@@ -63,6 +63,7 @@
     font-size: 14px;
     font-weight: 700;
     color: #e66767;
+    line-height: 22px;
     `
 
     export const Description = styled.p`

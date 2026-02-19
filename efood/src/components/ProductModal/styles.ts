@@ -33,7 +33,7 @@
     */
     export const Modal = styled.div`
     background-color: #e66767;
-    color: #fff;
+    color: #FFFFFF;
 
     /* Figma usa um modal visualmente mais largo */
     max-width: 1100px;
@@ -122,7 +122,7 @@
 
     /* Botão mais alto e confortável (Figma) */
     padding: 8px 16px;
-    width: 240px;
+    width: 236px;
     heigth: 24px;
 
     font-weight: 700;

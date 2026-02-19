@@ -1,6 +1,5 @@
 // Página de Checkout (Entrega do pedido)
 // Parte 4 do projeto efood
-// Neste momento: apenas layout (sem lógica e sem API)
 
 import * as S from './styles'
 

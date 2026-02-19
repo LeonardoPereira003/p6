@@ -47,7 +47,7 @@
     }
     `
 
-    /* ✅ LOGO EXATA DO FIGMA */
+    /*  LOGO EXATA DO FIGMA */
     export const Logo = styled.img`
     width: 125px;
     height: 57.5px;
@@ -76,7 +76,7 @@
     position: relative;
     `
 
-    /* ✅ Overlay correto (50%) */
+    /*  Overlay correto (50%) */
     export const HeroOverlay = styled.div`
     position: absolute;
     inset: 0;
@@ -100,7 +100,7 @@
     color: #ffffff;
     `
 
-    /* ✅ ITALIANA — exatamente como no Figma */
+    /*  ITALIANA — exatamente como no Figma */
     export const RestaurantType = styled.span`
     font-family: 'Roboto', sans-serif;
     font-size: 32px;
@@ -118,7 +118,7 @@
     }
     `
 
-    /* ✅ TÍTULO PRINCIPAL */
+    /*  TÍTULO PRINCIPAL */
     export const RestaurantTitle = styled.h1`
     font-family: 'Roboto', sans-serif;
     font-size: 32px;

@@ -29,7 +29,6 @@
 
     button {
         width: 100%;
-        background-color: #9c2188;
         color: #e66767;
         border: none;
         padding: 4px;
