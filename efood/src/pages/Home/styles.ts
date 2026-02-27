@@ -47,12 +47,13 @@
     grid-template-columns: 1fr 1fr;
     gap: 80px;
 
-    /* Tablet */
+    align-items: stretch; 
+    grid-auto-rows: 1fr;
+
     @media (max-width: 1024px) {
         gap: 48px;
     }
 
-    /* Mobile */
     @media (max-width: 600px) {
         grid-template-columns: 1fr;
         gap: 32px;

@@ -38,8 +38,9 @@
     */
     useEffect(() => {
         api
-        .get('/restaurantes')
+        .get('restaurantes')
         .then((response) => {
+            console.log(response.data)
             setRestaurants(response.data)
         })
         .catch((error) => {

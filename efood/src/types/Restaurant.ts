@@ -1,4 +1,7 @@
 // Tipagem de restaurante (API e Home)
+
+import type { Product } from "./Product"
+
 export type Restaurant = {
     id: number
     titulo: string
@@ -7,4 +10,5 @@ export type Restaurant = {
     avaliacao: number
     descricao: string
     capa: string
+    cardapio: Product[]
 }

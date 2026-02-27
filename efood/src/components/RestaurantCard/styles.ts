@@ -8,6 +8,7 @@
     flex-direction: column;
 
     overflow: hidden;
+    height: 100%;
     `
 
     export const ImageWrapper = styled.div`
@@ -73,6 +74,10 @@
     color: #e66767;
 
     margin-bottom: 16px;
+    `
+
+    export const ButtonWrapper = styled.div`
+    margin-top: auto;
     `
 
     export const Button = styled.button`

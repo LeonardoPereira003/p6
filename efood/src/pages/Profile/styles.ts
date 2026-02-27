@@ -47,7 +47,6 @@
     }
     `
 
-    /*  LOGO EXATA DO FIGMA */
     export const Logo = styled.img`
     width: 125px;
     height: 57.5px;
@@ -60,7 +59,7 @@
 
     /*
     ==================================================
-    HERO / BANNER
+    HERO
     ==================================================
     */
 
@@ -76,14 +75,12 @@
     position: relative;
     `
 
-    /*  Overlay correto (50%) */
     export const HeroOverlay = styled.div`
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     `
 
-    /* Container interno alinhado ao grid 1024 */
     export const HeroInner = styled.div`
     max-width: 1024px;
     height: 100%;
@@ -100,17 +97,14 @@
     color: #ffffff;
     `
 
-    /*  ITALIANA — exatamente como no Figma */
     export const RestaurantType = styled.span`
     font-family: 'Roboto', sans-serif;
     font-size: 32px;
     font-weight: 100;
     line-height: 100%;
     color: #ffffff;
-
     margin-bottom: 8px;
 
-    /* sobe somente ele */
     transform: translateY(-150px);
 
     @media (max-width: 768px) {
@@ -118,21 +112,18 @@
     }
     `
 
-    /*  TÍTULO PRINCIPAL */
     export const RestaurantTitle = styled.h1`
     font-family: 'Roboto', sans-serif;
     font-size: 32px;
     font-weight: 900;
     line-height: 100%;
-    letter-spacing: 0;
     color: #ffffff;
     margin: 0;
 
     @media (max-width: 768px) {
         font-size: 22px;
     }
-`
-
+    `
 
     /*
     ==================================================
@@ -157,6 +148,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
+    align-items: stretch;
 
     @media (max-width: 1024px) {
         grid-template-columns: repeat(2, 1fr);
@@ -170,6 +162,10 @@
     export const ProductCard = styled.div`
     background-color: #e66767;
     padding: 8px;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     `
 
     export const ProductImage = styled.img`
@@ -182,6 +178,10 @@
     padding: 8px;
     color: #FFEBD9;
 
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
     h3 {
         font-size: 16px;
         margin-bottom: 8px;
@@ -193,7 +193,7 @@
         line-height: 22px;
         margin-bottom: 8px;
         font-weight: 700;
-        color: #FFEBD9; 
+        color: #FFEBD9;
     }
 
     button {
@@ -205,5 +205,7 @@
         padding: 6px;
         font-weight: 700;
         cursor: pointer;
+
+        margin-top: auto;
     }
     `

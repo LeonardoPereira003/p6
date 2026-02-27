@@ -1,59 +1,59 @@
-    import { useState } from 'react'
-    import { useDispatch, useSelector } from 'react-redux'
-    import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 
-    import * as S from './styles'
-    import logo from '../../assets/logo.png'
-    import pizzaImg from '../../assets/pizza2.png'
+import * as S from './styles'
+import logo from '../../assets/logo.png'
 
-    import ProductModal from '../../components/ProductModal'
-    import Cart from '../../components/Cart'
-    import CheckoutEntrega from '../../components/CheckoutEntrega'
-    import CheckoutPagamento from '../../components/CheckoutPagamento'
-    import CheckoutConfirmacao from '../../components/CheckoutConfirmacao'
-    import Footer from '../../components/Footer'
+import ProductModal from '../../components/ProductModal'
+import Cart from '../../components/Cart'
+import CheckoutEntrega from '../../components/CheckoutEntrega'
+import CheckoutPagamento from '../../components/CheckoutPagamento'
+import CheckoutConfirmacao from '../../components/CheckoutConfirmacao'
+import Footer from '../../components/Footer'
 
-    import { addItem, clearCart } from '../../store/cartSlice'
-    import type { Product } from '../../types/Product'
-    import type { RootState } from '../../store'
+import { addItem, clearCart } from '../../store/cartSlice'
+import type { RootState } from '../../store'
+import type { Product } from '../../types/Product'
+import type { Restaurant } from '../../types/Restaurant'
 
-    type Etapa = 'cart' | 'entrega' | 'pagamento' | 'confirmacao'
+type Etapa = 'cart' | 'entrega' | 'pagamento' | 'confirmacao'
 
-    const Profile = () => {
+const Profile = () => {
     const navigate = useNavigate()
-
-    const [modalAberto, setModalAberto] = useState(false)
-    const [painelAberto, setPainelAberto] = useState(false)
-    const [etapa, setEtapa] = useState<Etapa>('cart')
+    const { id } = useParams()
 
     const dispatch = useDispatch()
     const items = useSelector((state: RootState) => state.cart.items)
 
     const quantidade = items.reduce((acc, item) => acc + item.quantity, 0)
 
-    const produtoMock: Product = {
-        id: 1,
-        nome: 'Pizza Marguerita',
+    const [restaurant, setRestaurant] = useState<Restaurant | null>(null)
+    const [modalAberto, setModalAberto] = useState(false)
+    const [produtoSelecionado, setProdutoSelecionado] = useState<Product | null>(null)
 
-        //  descrição curta (CARD)
-        descricao:
-            'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
+    const [painelAberto, setPainelAberto] = useState(false)
+    const [etapa, setEtapa] = useState<Etapa>('cart')
 
-        //  descrição longa (MODAL)
-        descricaoLonga:
-            'A pizza Margherita é uma pizza clássica da culinária italiana, reconhecida por sua simplicidade e sabor inigualável. Ela é feita com uma base de massa fina e crocante, coberta com molho de tomate fresco, queijo mussarela de alta qualidade, manjericão fresco e azeite de oliva extra-virgem. A combinação de sabores é perfeita, com o molho de tomate suculento e ligeiramente ácido, o queijo derretido e cremoso e as folhas de manjericão frescas, que adicionam um toque de sabor herbáceo. É uma pizza simples, mas deliciosa, que agrada a todos os paladares e é uma ótima opção para qualquer ocasião.',
+    useEffect(() => {
+        async function fetchRestaurant() {
+            const response = await fetch(
+                `https://api-ebac.vercel.app/api/efood/restaurantes/${id}`
+            )
+            const data: Restaurant = await response.json()
+            setRestaurant(data)
+        }
 
-        foto: pizzaImg,
-        preco: 60.9,
-        porcao: 'Serve: 2 pessoas'
-    }
-
+        fetchRestaurant()
+    }, [id])
 
     function adicionarAoCarrinho() {
-        dispatch(addItem(produtoMock))
-        setModalAberto(false)
-        setEtapa('cart')
-        setPainelAberto(true)
+        if (produtoSelecionado) {
+            dispatch(addItem(produtoSelecionado))
+            setModalAberto(false)
+            setEtapa('cart')
+            setPainelAberto(true)
+        }
     }
 
     function finalizarPedido() {
@@ -63,110 +63,105 @@
         navigate('/')
     }
 
+    if (!restaurant) return <p>Carregando...</p>
+
     return (
         <>
-        {/* ================= HEADER ================= */}
-        <S.TopBar>
-            <S.TopBarContent>
-            <S.TopBarText>Restaurantes</S.TopBarText>
+            <S.TopBar>
+                <S.TopBarContent>
+                    <S.TopBarText>Restaurantes</S.TopBarText>
 
-            <S.Logo
-                src={logo}
-                alt="efood"
-                style={{ cursor: 'pointer' }}
-                onClick={() => navigate('/')}
-            />
+                    <S.Logo
+                        src={logo}
+                        alt="efood"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => navigate('/')}
+                    />
 
-            <S.TopBarText
-                style={{ cursor: 'pointer' }}
-                onClick={() => {
-                setEtapa('cart')
-                setPainelAberto(true)
-                }}
-            >
-                {quantidade} produto(s) no carrinho
-            </S.TopBarText>
-            </S.TopBarContent>
-        </S.TopBar>
+                    <S.TopBarText
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                            setEtapa('cart')
+                            setPainelAberto(true)
+                        }}
+                    >
+                        {quantidade} produto(s) no carrinho
+                    </S.TopBarText>
+                </S.TopBarContent>
+            </S.TopBar>
 
-        {/* ================= HERO ================= */}
-        <S.Hero>
-            <S.HeroOverlay />
-            <S.HeroInner>
-            <S.RestaurantType>Italiana</S.RestaurantType>
-            <S.RestaurantTitle>
-                La Dolce Vita Trattoria
-            </S.RestaurantTitle>
-            </S.HeroInner>
-        </S.Hero>
+            <S.Hero style={{ backgroundImage: `url(${restaurant.capa})` }}>
+                <S.HeroOverlay />
+                <S.HeroInner>
+                    <S.RestaurantType>{restaurant.tipo}</S.RestaurantType>
+                    <S.RestaurantTitle>{restaurant.titulo}</S.RestaurantTitle>
+                </S.HeroInner>
+            </S.Hero>
 
-        {/* ================= PRODUTOS ================= */}
-        <S.ProductsSection>
-            <S.ProductsContainer>
-            {Array.from({ length: 6 }).map((_, index) => (
-                <S.ProductCard key={index}>
-                <S.ProductImage
-                    src={pizzaImg}
-                    alt="Pizza Marguerita"
+            <S.ProductsSection>
+                <S.ProductsContainer>
+                    {restaurant.cardapio.map((produto) => (
+                        <S.ProductCard key={produto.id}>
+                            <S.ProductImage src={produto.foto} alt={produto.nome} />
+
+                            <S.ProductInfo>
+                                <h3>{produto.nome}</h3>
+                                <p>{produto.descricao}</p>
+
+                                <button
+                                    onClick={() => {
+                                        setProdutoSelecionado(produto)
+                                        setModalAberto(true)
+                                    }}
+                                >
+                                    Adicionar ao carrinho
+                                </button>
+                            </S.ProductInfo>
+                        </S.ProductCard>
+                    ))}
+                </S.ProductsContainer>
+            </S.ProductsSection>
+
+            {modalAberto && produtoSelecionado && (
+                <ProductModal
+                    title={produtoSelecionado.nome}
+                    description={produtoSelecionado.descricao}
+                    image={produtoSelecionado.foto}
+                    price={produtoSelecionado.preco}
+                    portion={produtoSelecionado.porcao}
+                    onClose={() => setModalAberto(false)}
+                    onAdd={adicionarAoCarrinho}
                 />
+            )}
 
-                <S.ProductInfo>
-                    <h3>{produtoMock.nome}</h3>
-                        
-                    <p>{produtoMock.descricao}</p>
+            {painelAberto && etapa === 'cart' && (
+                <Cart
+                    onClose={() => setPainelAberto(false)}
+                    onNext={() => setEtapa('entrega')}
+                />
+            )}
 
-                    <button onClick={() => setModalAberto(true)}>
-                    Adicionar ao carrinho
-                    </button>
-                </S.ProductInfo>
-                </S.ProductCard>
-            ))}
-            </S.ProductsContainer>
-        </S.ProductsSection>
+            {painelAberto && etapa === 'entrega' && (
+                <CheckoutEntrega
+                    onBack={() => setEtapa('cart')}
+                    onNext={() => setEtapa('pagamento')}
+                />
+            )}
 
-        {/* ================= MODAL ================= */}
-        {modalAberto && (
-        <ProductModal
-        title={produtoMock.nome}
-        description={produtoMock.descricaoLonga}
-        image={produtoMock.foto}
-        price={produtoMock.preco}
-        portion={produtoMock.porcao}
-        onClose={() => setModalAberto(false)}
-        onAdd={adicionarAoCarrinho}
-        />
+            {painelAberto && etapa === 'pagamento' && (
+                <CheckoutPagamento
+                    onBack={() => setEtapa('entrega')}
+                    onFinish={() => setEtapa('confirmacao')}
+                />
+            )}
 
-        )}
+            {painelAberto && etapa === 'confirmacao' && (
+                <CheckoutConfirmacao onFinish={finalizarPedido} />
+            )}
 
-        {/* ================= PAINEL LATERAL ================= */}
-        {painelAberto && etapa === 'cart' && (
-            <Cart
-            onClose={() => setPainelAberto(false)}
-            onNext={() => setEtapa('entrega')}
-            />
-        )}
-
-        {painelAberto && etapa === 'entrega' && (
-            <CheckoutEntrega
-            onBack={() => setEtapa('cart')}
-            onNext={() => setEtapa('pagamento')}
-            />
-        )}
-
-        {painelAberto && etapa === 'pagamento' && (
-            <CheckoutPagamento
-            onBack={() => setEtapa('entrega')}
-            onFinish={() => setEtapa('confirmacao')}
-            />
-        )}
-
-        {painelAberto && etapa === 'confirmacao' && (
-            <CheckoutConfirmacao onFinish={finalizarPedido} />
-        )}
-
-        <Footer />
+            <Footer />
         </>
     )
-    }
+}
 
-    export default Profile
+export default Profile
