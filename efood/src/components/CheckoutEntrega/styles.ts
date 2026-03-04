@@ -51,13 +51,13 @@
     }
     `
 
-    /* 🔥 NOVO: LINHA PARA CAMPOS LADO A LADO */
+    /*  LINHA PARA CAMPOS LADO A LADO */
     export const Row = styled.div`
     display: flex;
     gap: 8px;
     `
 
-    /* 🔥 NOVO: CONTAINER DE CADA CAMPO */
+    /*  CONTAINER DE CADA CAMPO */
     export const Field = styled.div`
     display: flex;
     flex-direction: column;

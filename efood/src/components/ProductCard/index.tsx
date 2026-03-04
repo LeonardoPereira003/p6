@@ -1,24 +1,47 @@
 import * as S from './styles'
 
-const ProductCard = () => {
+type Props = {
+    title: string
+    description: string
+    image: string
+    price: number
+    portion: string
+    onClose: () => void
+    onAdd: () => void
+}
+
+const ProductModal = ({
+    title,
+    description,
+    image,
+    price,
+    portion,
+    onClose,
+    onAdd
+}: Props) => {
     return (
-        <S.Card>
-            {/* Placeholder da imagem */}
-            <S.ImagePlaceholder />
+        <S.Overlay>
+            <S.Modal>
+                <S.CloseButton onClick={onClose}>×</S.CloseButton>
 
-            <S.Content>
-                <h3>Pizza Marguerita</h3>
+                <S.Content>
+                    <S.Image src={image} alt={title} />
 
-                <p>
-                    A clássica Marguerita: molho de tomate,
-                    mussarela derretida, manjericão fresco
-                    e um toque de azeite.
-                </p>
+                    <S.Info>
+                        <h2>{title}</h2>
 
-                <button>Adicionar ao carrinho</button>
-            </S.Content>
-        </S.Card>
+                        <p>{description}</p>
+
+                        <p>{portion}</p>
+
+                        <S.Button onClick={onAdd}>
+                            Adicionar ao carrinho - R$ {price.toFixed(2)}
+                        </S.Button>
+                    </S.Info>
+                </S.Content>
+            </S.Modal>
+        </S.Overlay>
     )
 }
 
-export default ProductCard
+export default ProductModal

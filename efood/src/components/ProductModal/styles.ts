@@ -35,17 +35,19 @@
     background-color: #e66767;
     color: #FFFFFF;
 
-    /* Figma usa um modal visualmente mais largo */
     max-width: 1100px;
     width: 100%;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
 
-    /* Padding maior no desktop conforme layout */
-    padding: 40px;
+    padding: 32px;
     position: relative;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 16px;
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
@@ -80,9 +82,8 @@
     - Mantém proporção e não estoura no mobile
     */
     export const Image = styled.img`
-    width: 100%;
-    height: 100%;
-    max-height: 420px;
+    width: 280px;
+    height: 280px;
     object-fit: cover;
     `
 
