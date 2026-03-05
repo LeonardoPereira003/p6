@@ -115,7 +115,7 @@
     `
 
     export const Button = styled.button`
-    margin-top: auto;
+    margin-top: 80px;
 
     background-color: #FFEBD9;
     color: #e66767;
@@ -124,7 +124,7 @@
     /* Botão mais alto e confortável (Figma) */
     padding: 8px 16px;
     width: 236px;
-    heigth: 24px;
+    height: 24px;
 
     font-weight: 700;
     cursor: pointer;
